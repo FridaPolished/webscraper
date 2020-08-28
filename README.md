@@ -1,1 +1,7 @@
 # webscraper
+
+
+### Technologies
+PuppeteerJS
+
+

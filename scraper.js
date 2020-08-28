@@ -1,13 +1,21 @@
 const puppeteer = require('puppeteer');
-
+var data = null;
 //working solution
-puppeteer.launch().then(async browser => {
+puppeteer.launch(//{
+  // headless: false,
+  // defaultViewport: null
+// }
+).then(async browser => {
   const page = await browser.newPage();
-  await page.goto('https://en.wikipedia.org/wiki/August_2');
-  const [el] = await page.$x('//*[@id="mw-content-text"]/div[1]/ul[1]');
+  // await page.goto('https://en.wikipedia.org/wiki/August_2');
+  await page.goto('https://en.wikipedia.org/wiki/Timeline_of_the_20th_century');
+  // const [el] = await page.$x('//*[@id="mw-content-text"]/div[1]/ul[1]');
+  const [el] = await page.$x('//*[@id="bodyContent"]');
     const src = await el.getProperty('textContent');
     const srcTxt = await src.jsonValue();
-    console.log({srcTxt});
+    data = srcTxt;
+    // console.log({srcTxt});
+    console.log(data);
   await browser.close();
 });
 
